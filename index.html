@@ -618,6 +618,26 @@
     .features-text h2 { margin-bottom:1rem; }
     .features-text > p { margin-bottom:2.8rem; }
 
+    .features-header {
+      text-align:center; max-width:680px;
+      margin:0 auto 64px;
+    }
+    .features-header .label { justify-content:center; }
+    .features-header .label::before { display:none; }
+    .features-header h2 { margin-bottom:1rem; }
+    .features-header p { color:var(--g2); }
+
+    .feat-block { margin-bottom:36px; }
+    .feat-block:last-child { margin-bottom:0; }
+    .feat-block-title {
+      display:block;
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:.74rem; font-weight:800; letter-spacing:.24em;
+      text-transform:uppercase; color:var(--red);
+      margin-bottom:16px; padding-bottom:12px;
+      border-bottom:1px solid var(--border);
+    }
+
     .feat-list { display:flex; flex-direction:column; gap:3px; }
     .feat-item {
       display:flex; align-items:flex-start; gap:20px;
@@ -1758,50 +1778,15 @@
 </section>
 
 <!-- EN ACCIÓN — video showcase -->
-<section id="en-accion">
-  <div class="ea-header">
-    <div class="reveal-left">
-      <span class="label">En la cancha</span>
-      <h2>La energía<br>real</h2>
-    </div>
-    <p class="reveal-right">Esto es lo que se vive en cada partido EZ Play. Fútbol, volleyball de arena y volleyball de piso — todo organizado y listo para vos.</p>
-  </div>
-  <div class="ea-videos-row">
-    <div class="ea-video-item">
-      <img src="assets/fotos/futbol-1.jpg" alt="Fútbol EZ Play" />
-      <div class="ea-overlay"></div>
-      <div class="ea-content">
-        <span class="ea-sport-tag">⚽ Fútbol</span>
-        <div class="ea-title">El gol<br>que faltaba</div>
-      </div>
-    </div>
-    <div class="ea-video-item">
-      <img src="assets/fotos/volley-arena-3.jpg" alt="Volleyball de Arena" />
-      <div class="ea-overlay"></div>
-      <div class="ea-content">
-        <div class="ea-title">Arena,<br>sol y red</div>
-      </div>
-    </div>
-    <div class="ea-video-item">
-      <img src="assets/fotos/volley-piso-2.jpg" alt="Volleyball de Piso" />
-      <div class="ea-overlay"></div>
-      <div class="ea-content">
-        <span class="ea-sport-tag">🏐 Volleyball Piso</span>
-        <div class="ea-title">Indoor<br>de noche</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- DEPORTES -->
 <section id="deportes">
   <div class="container">
     <div class="deportes-header">
       <div class="reveal-left">
-        <span class="label">Deportes</span>
-        <h2>Elige<br>tu juego</h2>
+        <span class="label">En la cancha</span>
+        <h2>La energía<br>real</h2>
       </div>
-      <p class="reveal-right" style="max-width:360px;text-align:right;">
+      <p class="reveal-right" style="max-width:380px;text-align:right;">
         Volleyball de arena, volleyball de piso y fútbol — todos con árbitro, balones y equipos organizados por la app.
       </p>
     </div>
@@ -1892,86 +1877,98 @@
   </div>
 </section>
 
-<!-- APP FEATURES -->
+<!-- TODO LISTO. SOLO JUGÁS. (físico + app, fusión premium) -->
 <section id="features">
   <div class="container">
+    <div class="features-header reveal">
+      <span class="label">Todo listo</span>
+      <h2>Solo<br>jugás</h2>
+      <p>No traés nada, no organizás nada. Llegás con ganas — el resto está cubierto en la cancha y en la app.</p>
+    </div>
+
     <div class="features-inner">
       <div class="features-text reveal-left">
-        <span class="label">Dentro del app</span>
-        <h2>Todo bajo<br>control</h2>
-        <p>La app no solo sirve para reservar. Durante el partido tenés acceso en tiempo real a todo lo que pasa en la cancha.</p>
-        <div class="feat-list" style="margin-top:2rem;">
-          <div class="feat-item">
-            <div class="feat-icon-wrap">🏆</div>
-            <div class="feat-content">
-              <h4>Marcador en vivo</h4>
-              <p>El árbitro actualiza el puntaje en tiempo real. Seguís el marcador desde tu celular durante el partido.</p>
+
+        <div class="feat-block">
+          <span class="feat-block-title">En la cancha</span>
+          <div class="feat-list">
+            <div class="feat-item">
+              <div class="feat-icon-wrap">🟥</div>
+              <div class="feat-content">
+                <h4>Árbitro profesional</h4>
+                <p>Cada partido con árbitro oficial. Decisiones justas, tiempos respetados.</p>
+              </div>
             </div>
-          </div>
-          <div class="feat-item">
-            <div class="feat-icon-wrap">⏱️</div>
-            <div class="feat-content">
-              <h4>Temporizador (fútbol)</h4>
-              <p>En fútbol el tiempo se lleva con un temporizador visible en la cancha para todos los jugadores.</p>
+            <div class="feat-item">
+              <div class="feat-icon-wrap">🏐</div>
+              <div class="feat-content">
+                <h4>Balón y petos incluidos</h4>
+                <p>Llegás y todo está listo: balón de calidad y peto de tu color de equipo.</p>
+              </div>
             </div>
-          </div>
-          <div class="feat-item">
-            <div class="feat-icon-wrap">👕</div>
-            <div class="feat-content">
-              <h4>Equipos automáticos</h4>
-              <p>La app divide los equipos. Llegás, ves en qué equipo quedaste y te ponés el peto de tu color.</p>
+            <div class="feat-item">
+              <div class="feat-icon-wrap">🏟️</div>
+              <div class="feat-content">
+                <h4>Cancha reservada</h4>
+                <p>El espacio está apartado y listo desde la hora exacta de tu partido.</p>
+              </div>
             </div>
-          </div>
-          <div class="feat-item">
-            <div class="feat-icon-wrap">📊</div>
-            <div class="feat-content">
-              <h4>Tabla de resultados</h4>
-              <p>Consultá los resultados de todos los partidos y la tabla de posiciones actualizada en tiempo real.</p>
+            <div class="feat-item">
+              <div class="feat-icon-wrap">👥</div>
+              <div class="feat-content">
+                <h4>Cupos limitados</h4>
+                <p>Siempre partido completo. Sin esperas ni cancelaciones de último minuto.</p>
+              </div>
             </div>
           </div>
         </div>
+
+        <div class="feat-block">
+          <span class="feat-block-title">En el app</span>
+          <div class="feat-list">
+            <div class="feat-item">
+              <div class="feat-icon-wrap">🏆</div>
+              <div class="feat-content">
+                <h4>Marcador en vivo</h4>
+                <p>El árbitro actualiza el puntaje en tiempo real. Lo seguís desde tu celular.</p>
+              </div>
+            </div>
+            <div class="feat-item">
+              <div class="feat-icon-wrap">⏱️</div>
+              <div class="feat-content">
+                <h4>Temporizador en cancha</h4>
+                <p>En fútbol el tiempo se lleva con un temporizador visible para todos los jugadores.</p>
+              </div>
+            </div>
+            <div class="feat-item">
+              <div class="feat-icon-wrap">👕</div>
+              <div class="feat-content">
+                <h4>Equipos automáticos</h4>
+                <p>La app divide los equipos. Ves en qué equipo quedaste antes de llegar.</p>
+              </div>
+            </div>
+            <div class="feat-item">
+              <div class="feat-icon-wrap">💳</div>
+              <div class="feat-content">
+                <h4>Pago desde el celular</h4>
+                <p>Reservás y pagás en segundos. Sin efectivo, sin filas, sin papeles.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="features-visual reveal-right">
         <div class="app-glow"></div>
         <div class="dual-phones">
-
-          <!-- Teléfono 1: Pantalla Home real del app -->
           <div class="app-screenshot-phone">
             <img src="assets/CAPTURA%20DEL%20APP/IMG_1892.jpg" alt="EZ Play — Pantalla Home" />
           </div>
-
-          <!-- Teléfono 2: Pantalla Jugar con partidos reales -->
           <div class="app-screenshot-phone" style="margin-top:44px;">
             <div class="app-screenshot-phone-glow"></div>
             <img src="assets/CAPTURA%20DEL%20APP/IMG_1897.jpg" alt="EZ Play — Jugar" />
           </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BENEFICIOS -->
-<section id="beneficios">
-  <div class="container">
-    <div class="beneficios-inner reveal">
-      <div class="beneficios-img">
-        <img src="assets/fotos/hero-partido.jpg" alt="Partido EZ Play" />
-      </div>
-      <div class="beneficios-content">
-        <span class="label">Qué incluye</span>
-        <h2>Todo<br>incluido</h2>
-        <p>No traés nada, no organizás nada. Solo llegás con ganas de jugar.</p>
-        <div class="bene-list">
-          <div class="bene-item"><div class="bene-check">✓</div><span class="bene-text">Árbitro profesional en cada partido</span></div>
-          <div class="bene-item"><div class="bene-check">✓</div><span class="bene-text">Balones de calidad incluidos</span></div>
-          <div class="bene-item"><div class="bene-check">✓</div><span class="bene-text">Petos de colores por equipo al llegar</span></div>
-          <div class="bene-item"><div class="bene-check">✓</div><span class="bene-text">Cancha reservada y lista desde el inicio</span></div>
-          <div class="bene-item"><div class="bene-check">✓</div><span class="bene-text">Cupos limitados — siempre partido completo</span></div>
-          <div class="bene-item"><div class="bene-check">✓</div><span class="bene-text">Pago 100% desde el celular, sin efectivo</span></div>
-          <div class="bene-item"><div class="bene-check">✓</div><span class="bene-text">Marcador y resultados en tiempo real</span></div>
         </div>
       </div>
     </div>
@@ -2037,24 +2034,6 @@
           <a href="https://www.tiktok.com/@ezplaylatam?_r=1&_t=ZS-95tZSG4GNAA" target="_blank" class="social-link">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.56V6.8a4.85 4.85 0 01-1.07-.11z"/></svg>
             EZ Play — TikTok
-          </a>
-        </div>
-        <div class="insta-grid" style="margin-top:3px;">
-          <a href="https://www.instagram.com/reel/DMBNxMPPkUe/" target="_blank" class="ig-reel-card">
-            <img src="assets/CAPTURAS%20INSTAGRAM/IMG_1910.jpg" alt="Reel @ezplaylatam" loading="lazy" />
-            <div class="ig-reel-overlay"><div class="ig-reel-play"><svg width="11" height="11" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="ig-reel-label">Reel</span></div>
-          </a>
-          <a href="https://www.instagram.com/reel/DXhTb69k7aG/" target="_blank" class="ig-reel-card">
-            <img src="assets/CAPTURAS%20INSTAGRAM/IMG_1911.jpg" alt="Reel @ezplaylatam" loading="lazy" />
-            <div class="ig-reel-overlay"><div class="ig-reel-play"><svg width="11" height="11" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="ig-reel-label">Reel</span></div>
-          </a>
-          <a href="https://www.instagram.com/reel/DTbClO7D6Me/" target="_blank" class="ig-reel-card">
-            <img src="assets/CAPTURAS%20INSTAGRAM/IMG_1912.jpg" alt="Reel @ezplaylatam" loading="lazy" />
-            <div class="ig-reel-overlay"><div class="ig-reel-play"><svg width="11" height="11" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="ig-reel-label">Reel</span></div>
-          </a>
-          <a href="https://www.instagram.com/reel/DRFg-hejzEs/" target="_blank" class="ig-reel-card">
-            <img src="assets/CAPTURAS%20INSTAGRAM/IMG_1913.jpg" alt="Reel @ezplaylatam" loading="lazy" />
-            <div class="ig-reel-overlay"><div class="ig-reel-play"><svg width="11" height="11" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="ig-reel-label">Reel</span></div>
           </a>
         </div>
       </div>
