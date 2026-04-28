@@ -1,23 +1,75 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-PA">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EZ Play · Reserva tu cupo y juega en Panamá</title>
+  <title>EZ Play · Reserva tu cupo y juega fútbol y volleyball en Panamá</title>
+  <meta name="description" content="Reserva tu cupo y juega fútbol o volleyball en Panamá. +3,000 jugadores, +500 partidos organizados. Árbitro, balón, petos y equipos listos. Solo descargas la app." />
+  <meta name="keywords" content="EZ Play, fútbol Panamá, volleyball Panamá, reservar cancha, partidos pickup, deporte Panamá, app deportiva Panamá" />
+  <meta name="author" content="EZ Play" />
+  <meta name="theme-color" content="#C20000" />
+
+  <link rel="canonical" href="https://ezplayapp.com" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="EZ Play · Reserva tu cupo y juega" />
-  <meta property="og:description" content="La forma más fácil de jugar fútbol y volleyball en Panamá. Reserva tu cupo, llega y juega. Árbitro, petos y organización incluida." />
+  <meta property="og:description" content="+3,000 jugadores en Panamá. Reserva tu cupo, llega y juega. Árbitro, balón y petos incluidos. Disponible en iOS y Android." />
   <meta property="og:url" content="https://ezplayapp.com" />
   <meta property="og:site_name" content="EZ Play" />
   <meta property="og:locale" content="es_PA" />
+  <meta property="og:image" content="https://ezplayapp.com/assets/fotos/hero-partido.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Partido de EZ Play en Panamá" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EZ Play · Reserva tu cupo y juega" />
+  <meta name="twitter:description" content="+3,000 jugadores en Panamá. Reserva tu cupo, llega y juega." />
+  <meta name="twitter:image" content="https://ezplayapp.com/assets/fotos/hero-partido.jpg" />
 
   <link rel="icon" type="image/png" href="assets/Logo%20(PNG)/Logo%20EZPlay%206%20transparent.png" />
+  <link rel="apple-touch-icon" href="assets/Logo%20(PNG)/Logo%20EZPlay%206%20transparent.png" />
+
+  <link rel="preload" as="image" href="assets/fotos/hero-partido.jpg" fetchpriority="high" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "EZ Play",
+    "operatingSystem": "iOS, Android",
+    "applicationCategory": "SportsApplication",
+    "description": "App para reservar partidos de fútbol y volleyball en Panamá. Árbitro, balón, petos y equipos organizados.",
+    "url": "https://ezplayapp.com",
+    "image": "https://ezplayapp.com/assets/fotos/hero-partido.jpg",
+    "inLanguage": "es-PA",
+    "offers": {
+      "@type": "Offer",
+      "price": "6.50",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "3000"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Panamá"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "EZ Play",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://ezplayapp.com/assets/Logo%20(PNG)/Logo%20EZPlay%206%20transparent.png"
+      }
+    }
+  }
+  </script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -229,6 +281,14 @@
       width:100%; height:100%; object-fit:cover;
       object-position:center 30%;
       filter:brightness(.45);
+      animation: ken-burns 24s ease-in-out infinite alternate;
+    }
+    @keyframes ken-burns {
+      0%   { transform: scale(1.0)  translate(0, 0); }
+      100% { transform: scale(1.08) translate(-1.5%, 1%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-bg img { animation: none; }
     }
     .hero-bg::after {
       content:'';
@@ -924,15 +984,40 @@
     .ig-reel-label { font-family:'Barlow Condensed',sans-serif; font-size:.58rem; font-weight:700; letter-spacing:.18em; color:rgba(255,255,255,.65); text-transform:uppercase; }
 
     /* Feed strip */
-    .ig-feed-strip { margin-top:56px; padding-top:44px; border-top:1px solid var(--border); }
-    .ig-feed-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+    .ig-feed-strip { margin-top:56px; padding-top:44px; border-top:1px solid var(--border); position:relative; }
+    .ig-feed-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
     .ig-feed-title { font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--g1); }
+    .ig-feed-hint {
+      display:none;
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:.7rem; font-weight:600; letter-spacing:.18em;
+      text-transform:uppercase; color:var(--g3);
+      animation: swipe-hint 1.8s ease-in-out infinite;
+    }
+    @keyframes swipe-hint {
+      0%, 100% { transform: translateX(0); opacity:.6; }
+      50%      { transform: translateX(8px); opacity:1; }
+    }
     .ig-feed-link { font-family:'Barlow Condensed',sans-serif; font-size:.75rem; font-weight:700; letter-spacing:.1em; color:var(--g2); text-transform:uppercase; border-bottom:1px solid var(--border2); padding-bottom:2px; transition:color .3s,border-color .3s; }
     .ig-feed-link:hover { color:white; border-color:white; }
-    .ig-feed-row { display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; scrollbar-width:thin; scrollbar-color:var(--red) transparent; }
+    .ig-feed-row {
+      display:flex; gap:10px; overflow-x:auto; padding-bottom:6px;
+      scrollbar-width:thin; scrollbar-color:var(--red) transparent;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+    }
     .ig-feed-row::-webkit-scrollbar { height:3px; }
     .ig-feed-row::-webkit-scrollbar-thumb { background:var(--red); border-radius:2px; }
-    .ig-feed-item { flex:0 0 148px; }
+    .ig-feed-item { flex:0 0 148px; scroll-snap-align:start; }
+    .ig-feed-strip::after {
+      content:''; position:absolute; right:0; bottom:6px; top:88px;
+      width:60px; pointer-events:none;
+      background:linear-gradient(to right, transparent, var(--bg2));
+    }
+    @media (max-width:640px) {
+      .ig-feed-hint { display:inline-block; }
+      .ig-feed-item { flex:0 0 132px; }
+    }
 
     .wha-card {
       background:var(--bg3); border:1px solid var(--border);
@@ -959,6 +1044,46 @@
       text-transform:uppercase; transition:all .3s;
     }
     .wha-btn:hover { background:#1da851; transform:translateY(-2px); box-shadow:0 8px 24px rgba(37,211,102,.35); }
+
+    /* ── FAQ ── */
+    #faq {
+      padding:110px 0;
+      background:var(--bg);
+      border-top:1px solid var(--border);
+    }
+    .faq-header { text-align:center; max-width:620px; margin:0 auto 64px; }
+    .faq-header h2 { margin-bottom:1rem; }
+    .faq-list {
+      max-width:820px; margin:0 auto;
+      display:flex; flex-direction:column; gap:3px;
+    }
+    .faq-item {
+      background:var(--bg2); border:1px solid var(--border);
+      border-left:3px solid transparent;
+      transition:border-color .3s, background .3s;
+    }
+    .faq-item[open] { border-left-color:var(--red); background:var(--bg3); }
+    .faq-item summary {
+      list-style:none;
+      padding:22px 28px;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:space-between; gap:20px;
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:1.05rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:.04em; color:white;
+    }
+    .faq-item summary::-webkit-details-marker { display:none; }
+    .faq-item summary::after {
+      content:'+';
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:1.6rem; font-weight:300; color:var(--red);
+      flex-shrink:0; transition:transform .3s;
+    }
+    .faq-item[open] summary::after { content:'−'; }
+    .faq-item .faq-body {
+      padding:0 28px 22px;
+      font-size:.92rem; color:var(--g2); line-height:1.75;
+    }
 
     /* ── B2B ── */
     #b2b {
@@ -1338,7 +1463,11 @@
       .b2b-inner     { grid-template-columns:1fr; gap:52px; }
       .footer-top    { grid-template-columns:1fr; gap:28px; }
       .footer-bottom { flex-direction:column; text-align:center; }
-      .hero-stats    { display:none; }
+      .hero-stats    { flex-wrap:wrap; }
+      .hero-stats .stat-box { flex:0 0 50%; padding:18px 0; }
+      .hero-stats .stat-box:nth-child(2) { border-right:none; }
+      .hero-stats .stat-box:nth-child(1),
+      .hero-stats .stat-box:nth-child(2) { border-bottom:1px solid var(--border); }
       .partidos-top  { flex-direction:column; align-items:flex-start; }
       .partidos-top-right { text-align:left; }
       .deportes-header { flex-direction:column; align-items:flex-start; }
@@ -1459,14 +1588,15 @@
 <body>
 
 <!-- MOBILE MENU -->
-<div class="mobile-nav" id="mobileNav">
-  <button class="mobile-close" id="mobileClose">✕</button>
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menú principal">
+  <button class="mobile-close" id="mobileClose" aria-label="Cerrar menú">✕</button>
   <a href="#partidos" onclick="closeMob()">Partidos</a>
   <a href="#mvps" onclick="closeMob()">MVPs</a>
   <a href="#deportes" onclick="closeMob()">Deportes</a>
   <a href="#como" onclick="closeMob()">Cómo funciona</a>
   <a href="#app" onclick="closeMob()">Descargar</a>
   <a href="#comunidad" onclick="closeMob()">Comunidad</a>
+  <a href="#faq" onclick="closeMob()">FAQ</a>
   <a href="#b2b" onclick="closeMob()">Empresas</a>
   <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px;">
     <a href="https://apps.apple.com/pa/app/ez-play/id6446805916" target="_blank" class="btn btn-red">App Store</a>
@@ -1491,10 +1621,11 @@
         <li><a href="#como">Cómo funciona</a></li>
         <li><a href="#app">Descargar</a></li>
         <li><a href="#comunidad">Comunidad</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#b2b">Empresas</a></li>
       </ul>
       <a href="https://apps.apple.com/pa/app/ez-play/id6446805916" target="_blank" class="btn btn-red nav-cta desk">Descargar app</a>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -1515,9 +1646,9 @@
         Llega.<br>
         <span class="red">Juega.</span>
       </h1>
-      <div class="hero-sub">Sin buscar equipo. Sin organizar nada.</div>
+      <div class="hero-sub">Sin grupos de WhatsApp. Sin armar equipo. Sin perder tiempo.</div>
       <p class="hero-desc">
-        Reserva tu cupo en segundos. Nosotros nos encargamos del resto — equipos, árbitro, balones y organización incluida.
+        +3,000 jugadores ya reservan partidos en Panamá con EZ Play. Cancha, árbitro, balón y petos — todo listo cuando llegas.
       </p>
       <div class="hero-stores">
         <a href="https://apps.apple.com/pa/app/ez-play/id6446805916" target="_blank" class="btn-store">
@@ -1540,16 +1671,16 @@
 
   <div class="hero-stats">
     <div class="stat-box">
+      <span class="stat-num" data-count="3000" data-suffix="+">3,000+</span>
+      <span class="stat-label">Jugadores activos</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num" data-count="500" data-suffix="+">500+</span>
+      <span class="stat-label">Partidos organizados</span>
+    </div>
+    <div class="stat-box">
       <span class="stat-num" data-count="3">3</span>
       <span class="stat-label">Deportes</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-num" data-count="20">20</span>
-      <span class="stat-label">Cupos por partido</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-num" data-count="100" data-suffix="%">100%</span>
-      <span class="stat-label">Organizado</span>
     </div>
     <div class="stat-box">
       <span class="stat-num">PTY</span>
@@ -1585,14 +1716,14 @@
       <!-- Partido 1: Fútbol -->
       <div class="partido-card reveal d1">
         <div class="partido-img">
-          <img src="assets/fotos/futbol-1.jpg" alt="Partido de fútbol" />
+          <img src="assets/fotos/futbol-1.jpg" alt="Partido de fútbol" loading="lazy" />
           <span class="partido-badge-sport">⚽ Fútbol Masculino</span>
           <span class="partido-badge-status status-ok">14 cupos disponibles</span>
           <span class="partido-price-badge">$6.50</span>
         </div>
         <div class="partido-body">
           <div class="partido-datetime">
-            <span class="partido-day">Sáb 26 Abr</span>
+            <span class="partido-day" data-day="next-sat">Sáb</span>
             <span class="partido-time">7:00–9:00 AM</span>
           </div>
           <div class="partido-venue">
@@ -1623,14 +1754,14 @@
       <!-- Partido 2: Volleyball Arena -->
       <div class="partido-card reveal d2">
         <div class="partido-img">
-          <img src="assets/fotos/volley-arena-2.jpg" alt="Volleyball de arena" />
+          <img src="assets/fotos/volley-arena-2.jpg" alt="Volleyball de arena" loading="lazy" />
           <span class="partido-badge-sport">🏐 Vóley Playa</span>
           <span class="partido-badge-status status-few">2 cupos disponibles</span>
           <span class="partido-price-badge">$6.50</span>
         </div>
         <div class="partido-body">
           <div class="partido-datetime">
-            <span class="partido-day">Sáb 26 Abr</span>
+            <span class="partido-day" data-day="next-sat">Sáb</span>
             <span class="partido-time">5:30–7:30 PM</span>
           </div>
           <div class="partido-venue">
@@ -1661,14 +1792,14 @@
       <!-- Partido 3: Volleyball Piso -->
       <div class="partido-card reveal d3">
         <div class="partido-img">
-          <img src="assets/fotos/volley-piso-1.jpg" alt="Volleyball de piso" />
+          <img src="assets/fotos/volley-piso-1.jpg" alt="Volleyball de piso" loading="lazy" />
           <span class="partido-badge-sport">🏐 Vóley Piso</span>
           <span class="partido-badge-status status-ok">8 cupos disponibles</span>
           <span class="partido-price-badge">$6.50</span>
         </div>
         <div class="partido-body">
           <div class="partido-datetime">
-            <span class="partido-day">Dom 27 Abr</span>
+            <span class="partido-day" data-day="next-sun">Dom</span>
             <span class="partido-time">8:00–10:00 PM</span>
           </div>
           <div class="partido-venue">
@@ -1793,7 +1924,7 @@
     <div class="deportes-grid">
 
       <div class="deporte-card reveal d1">
-        <div class="dc-bg"><img src="assets/fotos/volley-arena-1.jpg" alt="Volleyball de Arena" /></div>
+        <div class="dc-bg"><img src="assets/fotos/volley-arena-1.jpg" alt="Volleyball de Arena" loading="lazy" /></div>
         <div class="dc-overlay"></div>
         <div class="dc-content">
           <span class="dc-category">Mixto</span>
@@ -1809,7 +1940,7 @@
       </div>
 
       <div class="deporte-card reveal d2">
-        <div class="dc-bg"><img src="assets/fotos/volley-piso-1.jpg" alt="Volleyball de Piso" /></div>
+        <div class="dc-bg"><img src="assets/fotos/volley-piso-1.jpg" alt="Volleyball de Piso" loading="lazy" /></div>
         <div class="dc-overlay"></div>
         <div class="dc-content">
           <span class="dc-category">Mixto</span>
@@ -1825,7 +1956,7 @@
       </div>
 
       <div class="deporte-card reveal d3">
-        <div class="dc-bg"><img src="assets/fotos/futbol-3.jpg" alt="Fútbol" /></div>
+        <div class="dc-bg"><img src="assets/fotos/futbol-3.jpg" alt="Fútbol" loading="lazy" /></div>
         <div class="dc-overlay"></div>
         <div class="dc-content">
           <span class="dc-category">Masculino</span>
@@ -1963,11 +2094,11 @@
         <div class="app-glow"></div>
         <div class="dual-phones">
           <div class="app-screenshot-phone">
-            <img src="assets/CAPTURA%20DEL%20APP/IMG_1892.jpg" alt="EZ Play — Pantalla Home" />
+            <img src="assets/CAPTURA%20DEL%20APP/IMG_1892.jpg" alt="EZ Play — Pantalla Home" loading="lazy" />
           </div>
           <div class="app-screenshot-phone" style="margin-top:44px;">
             <div class="app-screenshot-phone-glow"></div>
-            <img src="assets/CAPTURA%20DEL%20APP/IMG_1897.jpg" alt="EZ Play — Jugar" />
+            <img src="assets/CAPTURA%20DEL%20APP/IMG_1897.jpg" alt="EZ Play — Jugar" loading="lazy" />
           </div>
         </div>
       </div>
@@ -2064,6 +2195,7 @@
     <div class="ig-feed-strip reveal">
       <div class="ig-feed-header">
         <span class="ig-feed-title">Lo que pasa en el campo</span>
+        <span class="ig-feed-hint">Desliza →</span>
         <a href="https://www.instagram.com/ezplaylatam?igsh=OXVsZjVoMGowY3cw" target="_blank" class="ig-feed-link">Ver todo en @ezplaylatam →</a>
       </div>
       <div class="ig-feed-row">
@@ -2118,6 +2250,51 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-header reveal">
+      <span class="label" style="margin-bottom:.6rem;">Preguntas frecuentes</span>
+      <h2>Lo que<br>te preguntas</h2>
+      <p style="margin-top:1rem;">Las dudas más comunes antes de tu primer partido.</p>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>¿Necesito experiencia para jugar?</summary>
+        <div class="faq-body">No. Hay partidos para todos los niveles. La mayoría son General — pickup amistoso. Si eres nuevo solo descarga la app, reserva y llega: el árbitro y los equipos están listos.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Qué pasa si llueve o cancelan el partido?</summary>
+        <div class="faq-body">Si EZ Play cancela el partido por clima o cualquier motivo, tu cupo se reembolsa automáticamente o lo puedes mover a otro horario desde la app.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Puedo cancelar mi reserva?</summary>
+        <div class="faq-body">Sí. Cancelaciones con suficiente anticipación liberan el cupo y se gestionan desde la app. Las políticas exactas las ves en tu reserva.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Tengo que llevar algo? ¿Balón? ¿Petos?</summary>
+        <div class="faq-body">Solo tu ropa deportiva. El balón, los petos por color de equipo, el árbitro y la cancha — todo está incluido en tu cupo.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cómo se arman los equipos?</summary>
+        <div class="faq-body">La app divide los equipos automáticamente antes del partido. Llegas, ves en qué equipo quedaste y te pones el peto del color asignado.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cuánto cuesta jugar?</summary>
+        <div class="faq-body">$6.50 por cupo en la mayoría de partidos. El precio exacto lo ves en cada partido antes de reservar — sin sorpresas.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿En qué zonas de Panamá hay partidos?</summary>
+        <div class="faq-body">Actualmente operamos en varias canchas de la ciudad de Panamá (Costa del Este, Xspark, IPA Cancha y otras). En la app ves todas las canchas activas y los próximos partidos disponibles.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cómo se eligen los MVPs?</summary>
+        <div class="faq-body">Los árbitros registran el desempeño de cada jugador en tiempo real. Cada semana la app destaca a los MVPs según los partidos jugados y el rendimiento registrado.</div>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -2207,7 +2384,12 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 EZ Play · Todos los derechos reservados · Panamá</span>
-      <span><a href="mailto:administracion@ezplayapp.com">administracion@ezplayapp.com</a></span>
+      <span style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
+        <a href="#faq">Preguntas frecuentes</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="terminos.html">Términos</a>
+        <a href="mailto:administracion@ezplayapp.com">administracion@ezplayapp.com</a>
+      </span>
     </div>
   </div>
 </footer>
@@ -2220,11 +2402,16 @@
   }, { passive: true });
 
   /* Mobile menu */
-  document.getElementById('hamburger').addEventListener('click', () => {
+  const hamb = document.getElementById('hamburger');
+  hamb.addEventListener('click', () => {
     document.getElementById('mobileNav').classList.add('open');
+    hamb.setAttribute('aria-expanded', 'true');
   });
   document.getElementById('mobileClose').addEventListener('click', closeMob);
-  function closeMob() { document.getElementById('mobileNav').classList.remove('open'); }
+  function closeMob() {
+    document.getElementById('mobileNav').classList.remove('open');
+    hamb.setAttribute('aria-expanded', 'false');
+  }
 
   /* Scroll reveal */
   const io = new IntersectionObserver((entries) => {
@@ -2257,17 +2444,49 @@
     });
   });
 
+  /* Detección de plataforma — los botones de descarga van al store correcto */
+  (function platformLinks(){
+    const ua = (navigator.userAgent || '').toLowerCase();
+    const isAndroid = /android/.test(ua);
+    const isIOS = /iphone|ipad|ipod/.test(ua) || (/macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    const APP_STORE = 'https://apps.apple.com/pa/app/ez-play/id6446805916';
+    const PLAY_STORE = 'https://play.google.com/store/apps/details?id=com.r2e.EZPlay&pcampaignid=web_share';
+    if (!isAndroid && !isIOS) return;
+    const target = isAndroid ? PLAY_STORE : APP_STORE;
+    document.querySelectorAll('a.btn-reservar').forEach(a => { a.href = target; });
+  })();
+
+  /* Demo: fechas dinámicas para los partidos placeholder
+     (se reemplazan automáticamente cuando el endpoint esté conectado) */
+  (function fillDemoDates(){
+    const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    const dias  = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+    const today = new Date();
+    function next(targetDow) {
+      const d = new Date(today);
+      const diff = (targetDow - d.getDay() + 7) % 7 || 7;
+      d.setDate(d.getDate() + diff);
+      return d;
+    }
+    document.querySelectorAll('.partido-day[data-day]').forEach(el => {
+      const tag = el.dataset.day;
+      const d = tag === 'next-sun' ? next(0) : next(6);
+      el.textContent = `${dias[d.getDay()]} ${d.getDate()} ${meses[d.getMonth()]}`;
+    });
+  })();
+
   /* Counter animation */
   function animateCount(el, target, suffix = '') {
     let start = 0;
     const dur = 1400;
+    const fmt = (n) => n.toLocaleString('en-US');
     const step = (ts) => {
       if (!start) start = ts;
       const prog = Math.min((ts - start) / dur, 1);
       const ease = 1 - Math.pow(1 - prog, 3);
-      el.textContent = Math.floor(ease * target) + suffix;
+      el.textContent = fmt(Math.floor(ease * target)) + suffix;
       if (prog < 1) requestAnimationFrame(step);
-      else el.textContent = target + suffix;
+      else el.textContent = fmt(target) + suffix;
     };
     requestAnimationFrame(step);
   }
