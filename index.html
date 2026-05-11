@@ -2482,6 +2482,8 @@
       const raw  = await res.json();
       const games = raw?.data?.games || (Array.isArray(raw) ? raw : raw?.data || []);
       const list = games
+        .slice()
+        .sort((a, b) => new Date(a.startDate || 0) - new Date(b.startDate || 0))
         .map(_adaptGame)
         .filter(p => p.estado !== 'cancelado')
         .slice(0, 3);
