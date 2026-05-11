@@ -2545,12 +2545,53 @@
      descomenta PARTIDOS_HEADERS y pon tu anon key:
   ────────────────────────────────────────────────────────── */
 
-  const PARTIDOS_API = 'PEGAR_URL_AQUI';
+  const PARTIDOS_API = 'https://ezplay-prod.onrender.com/public/games/active';
 
-  // const PARTIDOS_HEADERS = {
-  //   'apikey': 'TU_SUPABASE_ANON_KEY',
-  //   'Authorization': 'Bearer TU_SUPABASE_ANON_KEY',
-  // };
+  /* === Adaptadores de la API EZ Play === */
+  const _TZ = 'America/Panama';
+  const _GAMETYPE_MAP = {
+    SOCCER: 'futbol',
+    VOLLEYBALL_BEACH: 'volley_arena',
+    VOLLEYBALL_INDOOR: 'volley_piso',
+  };
+  const _GENDER_MAP = { MALE: 'Masculino', FEMALE: 'Femenino', MIXED: 'Mixto' };
+  const _LEVEL_MAP  = { BEGINNER: 'Principiante', INTERMEDIATE: 'Intermedio', ADVANCED: 'Avanzado' };
+
+  const _fechaFmt = new Intl.DateTimeFormat('en-CA', { timeZone: _TZ, year:'numeric', month:'2-digit', day:'2-digit' });
+  const _horaFmt  = new Intl.DateTimeFormat('en-GB',  { timeZone: _TZ, hour:'2-digit', minute:'2-digit', hour12:false });
+
+  function _toDate(iso) {
+    if (!iso) return null;
+    const d = new Date(iso);
+    return isNaN(d) ? null : d;
+  }
+  function _fmtFecha(d) { return d ? _fechaFmt.format(d) : ''; }
+  function _fmtHora(d)  { return d ? _horaFmt.format(d)  : ''; }
+
+  function _adaptGame(g) {
+    const pd    = g.placeDetails || {};
+    const loc   = pd.location || {};
+    const start = _toDate(g.startDate);
+    const end   = _toDate(g.endDate);
+    const ocup  = Array.isArray(g.players) ? g.players.length : 0;
+    const tot   = Number(g.maxPlayers) || 0;
+    const foto  = Array.isArray(pd.imgs) && pd.imgs.length ? pd.imgs[0] : null;
+    return {
+      deporte:        _GAMETYPE_MAP[g.gameType] || g.gameType,
+      fecha:          _fmtFecha(start),
+      hora_inicio:    _fmtHora(start),
+      hora_fin:       _fmtHora(end),
+      venue:          pd.name || loc.fullAddress || g.place || '',
+      cupos_total:    tot,
+      cupos_ocupados: ocup,
+      precio:         Number(g.price) || 0,
+      formato:        g.teamPlayers ? `${g.teamPlayers} vs ${g.teamPlayers}` : '',
+      genero:         _GENDER_MAP[g.genderType] || '',
+      nivel:          _LEVEL_MAP[g.level] || 'General',
+      estado:         g.status === false ? 'cancelado' : (tot > 0 && ocup >= tot ? 'lleno' : 'disponible'),
+      foto_url:       foto,
+    };
+  }
 
   const _SPORT_FOTO  = {
     futbol:       'assets/fotos/futbol-1.jpg',
@@ -2619,7 +2660,9 @@
       const res  = await fetch(PARTIDOS_API, opts);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const raw  = await res.json();
-      const list = (Array.isArray(raw) ? raw : raw.data || [])
+      const games = raw?.data?.games || (Array.isArray(raw) ? raw : raw?.data || []);
+      const list = games
+        .map(_adaptGame)
         .filter(p => p.estado !== 'cancelado')
         .slice(0, 3);
       if (list.length === 0) return;
@@ -2662,12 +2705,33 @@
      descomenta MVPS_HEADERS y pon tu anon key:
   ────────────────────────────────────────────────────────── */
 
-  const MVPS_API = 'PEGAR_URL_AQUI';
+  const MVPS_API = 'https://ezplay-prod.onrender.com/public/mvp/weekly';
 
-  // const MVPS_HEADERS = {
-  //   'apikey': 'TU_SUPABASE_ANON_KEY',
-  //   'Authorization': 'Bearer TU_SUPABASE_ANON_KEY',
-  // };
+  /* Agrupa los registros por usuario, cuenta apariciones como MVP
+     y devuelve el top 3 ordenado por # de MVPs (desc). */
+  function _adaptMvps(records) {
+    const byUid = new Map();
+    for (const r of records || []) {
+      if (!r || !r.uid) continue;
+      let entry = byUid.get(r.uid);
+      if (!entry) {
+        const fullName = `${r.firstname || ''} ${r.lastname || ''}`.trim();
+        entry = {
+          uid: r.uid,
+          nombre: r.alias || fullName || 'MVP',
+          deporte: _GAMETYPE_MAP[r.gameType] || r.gameType,
+          partidos_mvp: 0,
+          foto_url: r.profilePic || null,
+        };
+        byUid.set(r.uid, entry);
+      }
+      entry.partidos_mvp += 1;
+    }
+    return [...byUid.values()]
+      .sort((a, b) => b.partidos_mvp - a.partidos_mvp)
+      .slice(0, 3)
+      .map((m, i) => ({ ...m, rank: i + 1 }));
+  }
 
   const _MVP_SPORT_LABEL = {
     futbol:       '⚽ Fútbol',
@@ -2702,7 +2766,8 @@
       const res  = await fetch(MVPS_API, opts);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const raw  = await res.json();
-      const list = (Array.isArray(raw) ? raw : raw.data || []).slice(0, 3);
+      const records = raw?.data?.records || (Array.isArray(raw) ? raw : raw?.data || []);
+      const list = _adaptMvps(records);
       if (list.length === 0) return;
       grid.innerHTML = list.map((m, i) => _buildMvpCard(m, _MVP_CLASSES[i] || '')).join('');
       grid.querySelectorAll('.mvp-card').forEach(el => io.observe(el));
