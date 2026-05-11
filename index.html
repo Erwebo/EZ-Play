@@ -2606,7 +2606,7 @@
   function _buildCard(p) {
     const libres  = Math.max(0, (p.cupos_total || 20) - (p.cupos_ocupados || 0));
     const pct     = Math.min(100, Math.round(((p.cupos_ocupados || 0) / (p.cupos_total || 20)) * 100));
-    const stCls   = libres === 0 ? 'status-lleno' : libres <= 3 ? 'status-few' : 'status-ok';
+    const stCls   = libres === 0 ? 'status-full' : libres <= 3 ? 'status-few' : 'status-ok';
     const stLbl   = libres === 0 ? 'Lleno' : `${libres} cupos disponibles`;
     const foto    = p.foto_url || _SPORT_FOTO[p.deporte] || _SPORT_FOTO.futbol;
     const icon    = _SPORT_ICON[p.deporte]  || '🏅';
