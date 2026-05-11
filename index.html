@@ -2377,16 +2377,28 @@
   const _GENDER_MAP = { MALE: 'Masculino', FEMALE: 'Femenino', MIXED: 'Mixto' };
   const _LEVEL_MAP  = { BEGINNER: 'Principiante', INTERMEDIATE: 'Intermedio', ADVANCED: 'Avanzado' };
 
-  const _fechaFmt = new Intl.DateTimeFormat('en-CA', { timeZone: _TZ, year:'numeric', month:'2-digit', day:'2-digit' });
-  const _horaFmt  = new Intl.DateTimeFormat('en-GB',  { timeZone: _TZ, hour:'2-digit', minute:'2-digit', hour12:false });
+  const _fechaLabelFmt = new Intl.DateTimeFormat('es-PA', { timeZone: _TZ, weekday:'short', day:'numeric', month:'short' });
+  const _hora12Fmt     = new Intl.DateTimeFormat('en-US',  { timeZone: _TZ, hour:'numeric', minute:'2-digit', hour12:true });
 
   function _toDate(iso) {
     if (!iso) return null;
     const d = new Date(iso);
     return isNaN(d) ? null : d;
   }
-  function _fmtFecha(d) { return d ? _fechaFmt.format(d) : ''; }
-  function _fmtHora(d)  { return d ? _horaFmt.format(d)  : ''; }
+  /* "lun., 12 may." → "lun 12 may" (el CSS lo pasa a mayúsculas) */
+  function _fmtFechaLabel(d) {
+    return d ? _fechaLabelFmt.format(d).replace(/[.,]/g, '').replace(/\s+/g, ' ').trim() : '';
+  }
+  /* Rango de horas en 12h: "7:00–9:00 AM" cuando comparten periodo,
+     "11:30 AM – 1:00 PM" cuando lo cruzan. */
+  function _fmtHoraRange(start, end) {
+    if (!start || !end) return '';
+    const s = _hora12Fmt.format(start);   // "7:00 AM"
+    const e = _hora12Fmt.format(end);     // "9:00 AM"
+    const sP = s.slice(-2), eP = e.slice(-2);
+    if (sP === eP) return `${s.slice(0, -3)}–${e.slice(0, -3)} ${sP}`;
+    return `${s} – ${e}`;
+  }
 
   function _adaptGame(g) {
     const pd    = g.placeDetails || {};
@@ -2398,9 +2410,8 @@
     const foto  = Array.isArray(pd.imgs) && pd.imgs.length ? pd.imgs[0] : null;
     return {
       deporte:        _GAMETYPE_MAP[g.gameType] || g.gameType,
-      fecha:          _fmtFecha(start),
-      hora_inicio:    _fmtHora(start),
-      hora_fin:       _fmtHora(end),
+      fecha_label:    _fmtFechaLabel(start),
+      horario:        _fmtHoraRange(start, end),
       venue:          pd.name || loc.fullAddress || g.place || '',
       cupos_total:    tot,
       cupos_ocupados: ocup,
@@ -2432,9 +2443,8 @@
     const icon    = _SPORT_ICON[p.deporte]  || '🏅';
     const dlbl    = _SPORT_LABEL[p.deporte] || p.deporte;
     const precio  = Number(p.precio || 6.5).toFixed(2);
-    const fechaObj = new Date(`${p.fecha}T${p.hora_inicio || '00:00'}`);
-    const fechaStr = isNaN(fechaObj) ? p.fecha : fechaObj.toLocaleDateString('es-PA', { weekday:'short', day:'numeric', month:'short' });
-    const horaStr  = `${p.hora_inicio || ''}–${p.hora_fin || ''}`;
+    const fechaStr = p.fecha_label || '';
+    const horaStr  = p.horario || '';
     const genIcon  = (p.genero || '').toLowerCase().includes('masc') ? '👨' : '⚤';
     return `
 <div class="partido-card reveal">
