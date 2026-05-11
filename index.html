@@ -1231,34 +1231,28 @@
       transform:translateY(-6px);
       box-shadow:0 20px 60px rgba(194,0,0,.14);
     }
-    .mvp-card.gold   { border-top:3px solid #f59e0b; }
-    .mvp-card.silver { border-top:3px solid #a0a0a0; }
-    .mvp-card.bronze { border-top:3px solid #b45309; }
+    .mvp-card { border-top:3px solid var(--red); }
 
     .mvp-rank {
       position:absolute; top:-1px; left:50%; transform:translateX(-50%);
       font-family:'Barlow Condensed',sans-serif;
       font-size:.68rem; font-weight:900; letter-spacing:.1em;
       text-transform:uppercase; padding:3px 12px;
+      background:var(--red); color:#fff;
     }
-    .gold   .mvp-rank { background:#f59e0b; color:#000; }
-    .silver .mvp-rank { background:#a0a0a0; color:#000; }
-    .bronze .mvp-rank { background:#b45309; color:#fff; }
 
     .mvp-avatar {
       width:96px; height:96px; border-radius:50%;
       overflow:hidden; margin:20px 0 16px;
-      border:3px solid var(--border2);
+      border:3px solid var(--red);
       background:var(--bg4);
       display:flex; align-items:center; justify-content:center;
       font-family:'Barlow Condensed',sans-serif;
       font-size:2.2rem; font-weight:900; color:var(--g3);
       flex-shrink:0;
       transition:border-color .3s, box-shadow .3s;
+      box-shadow:0 0 24px rgba(194,0,0,.18);
     }
-    .gold   .mvp-avatar { border-color:#f59e0b; box-shadow:0 0 28px rgba(245,158,11,.25); }
-    .silver .mvp-avatar { border-color:#a0a0a0; box-shadow:0 0 28px rgba(160,160,160,.18); }
-    .bronze .mvp-avatar { border-color:#b45309; box-shadow:0 0 28px rgba(180,83,9,.2); }
     .mvp-avatar img { width:100%; height:100%; object-fit:cover; }
 
     .mvp-name {
@@ -1871,8 +1865,8 @@
 
     <div class="mvps-grid">
 
-      <div class="mvp-card gold reveal d1">
-        <span class="mvp-rank">#1 MVP</span>
+      <div class="mvp-card reveal d1">
+        <span class="mvp-rank">MVP</span>
         <div class="mvp-avatar">K</div>
         <div class="mvp-name">Kriss</div>
         <div class="mvp-sport">🏐 Vóley Playa</div>
@@ -1880,8 +1874,8 @@
         <div class="mvp-stat-label">Partidos MVP</div>
       </div>
 
-      <div class="mvp-card silver reveal d2">
-        <span class="mvp-rank">#2 MVP</span>
+      <div class="mvp-card reveal d2">
+        <span class="mvp-rank">MVP</span>
         <div class="mvp-avatar">M</div>
         <div class="mvp-name">Mateo</div>
         <div class="mvp-sport">⚽ Fútbol</div>
@@ -1889,8 +1883,8 @@
         <div class="mvp-stat-label">Partidos MVP</div>
       </div>
 
-      <div class="mvp-card bronze reveal d3">
-        <span class="mvp-rank">#3 MVP</span>
+      <div class="mvp-card reveal d3">
+        <span class="mvp-rank">MVP</span>
         <div class="mvp-avatar">W</div>
         <div class="mvp-name">Will</div>
         <div class="mvp-sport">🏐 Vóley Piso</div>
@@ -2707,10 +2701,23 @@
 
   const MVPS_API = 'https://ezplay-prod.onrender.com/public/mvp/weekly';
 
+  /* Formatea created_at de un MVP como etiqueta tipo "DOM 10 MAY" en zona
+     horaria America/Panama. */
+  const _DOW_ES = { Sun:'DOM', Mon:'LUN', Tue:'MAR', Wed:'MIE', Thu:'JUE', Fri:'VIE', Sat:'SAB' };
+  const _MON_ES = { Jan:'ENE', Feb:'FEB', Mar:'MAR', Apr:'ABR', May:'MAY', Jun:'JUN', Jul:'JUL', Aug:'AGO', Sep:'SEP', Oct:'OCT', Nov:'NOV', Dec:'DIC' };
+  const _mvpDateParts = new Intl.DateTimeFormat('en-US', { timeZone: _TZ, weekday:'short', day:'numeric', month:'short' });
+  function _fmtMvpDate(iso) {
+    const d = _toDate(iso);
+    if (!d) return '';
+    const parts = _mvpDateParts.formatToParts(d);
+    const get = t => (parts.find(p => p.type === t) || {}).value || '';
+    return `${_DOW_ES[get('weekday')] || ''} ${get('day')} ${_MON_ES[get('month')] || ''}`.trim();
+  }
+
   /* La API devuelve los registros por fecha descendente (más recientes
-     primero). Tomamos los 3 MVPs más recientes (deduplicando por usuario
-     y conservando solo su aparición más reciente) y mostramos cuántas
-     veces fue MVP en la ventana de 7 días como stat secundario. */
+     primero). Tomamos los 3 MVPs más recientes (deduplicando por usuario,
+     conservando su aparición más reciente como fecha mostrada) y
+     contamos cuántas veces fue MVP en la ventana de 7 días. */
   function _adaptMvps(records) {
     const byUid = new Map();
     const order = [];
@@ -2724,14 +2731,13 @@
           deporte: _GAMETYPE_MAP[r.gameType] || r.gameType,
           partidos_mvp: 0,
           foto_url: r.profilePic || null,
+          fecha_label: _fmtMvpDate(r.created_at),
         });
         order.push(r.uid);
       }
       byUid.get(r.uid).partidos_mvp += 1;
     }
-    return order
-      .slice(0, 3)
-      .map((uid, i) => ({ ...byUid.get(uid), rank: i + 1 }));
+    return order.slice(0, 3).map(uid => byUid.get(uid));
   }
 
   const _MVP_SPORT_LABEL = {
@@ -2739,17 +2745,17 @@
     volley_arena: '🏐 Vóley Playa',
     volley_piso:  '🏐 Vóley Piso',
   };
-  const _MVP_CLASSES = ['gold', 'silver', 'bronze'];
 
-  function _buildMvpCard(m, cls) {
+  function _buildMvpCard(m) {
     const sport   = _MVP_SPORT_LABEL[m.deporte] || m.deporte || '';
     const initial = (m.nombre || '?')[0].toUpperCase();
     const avatar  = m.foto_url
       ? `<img src="${m.foto_url}" alt="${m.nombre}" />`
       : initial;
+    const label   = m.fecha_label || 'MVP';
     return `
-<div class="mvp-card ${cls} reveal">
-  <span class="mvp-rank">#${m.rank} MVP</span>
+<div class="mvp-card reveal">
+  <span class="mvp-rank">${label}</span>
   <div class="mvp-avatar">${avatar}</div>
   <div class="mvp-name">${m.nombre || ''}</div>
   <div class="mvp-sport">${sport}</div>
@@ -2770,7 +2776,7 @@
       const records = raw?.data?.records || (Array.isArray(raw) ? raw : raw?.data || []);
       const list = _adaptMvps(records);
       if (list.length === 0) return;
-      grid.innerHTML = list.map((m, i) => _buildMvpCard(m, _MVP_CLASSES[i] || '')).join('');
+      grid.innerHTML = list.map(_buildMvpCard).join('');
       grid.querySelectorAll('.mvp-card').forEach(el => io.observe(el));
     } catch(err) {
       console.warn('[EZ Play] API de MVPs no disponible, se muestran los MVPs de ejemplo.', err);
