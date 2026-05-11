@@ -2707,30 +2707,31 @@
 
   const MVPS_API = 'https://ezplay-prod.onrender.com/public/mvp/weekly';
 
-  /* Agrupa los registros por usuario, cuenta apariciones como MVP
-     y devuelve el top 3 ordenado por # de MVPs (desc). */
+  /* La API devuelve los registros por fecha descendente (más recientes
+     primero). Tomamos los 3 MVPs más recientes (deduplicando por usuario
+     y conservando solo su aparición más reciente) y mostramos cuántas
+     veces fue MVP en la ventana de 7 días como stat secundario. */
   function _adaptMvps(records) {
     const byUid = new Map();
+    const order = [];
     for (const r of records || []) {
       if (!r || !r.uid) continue;
-      let entry = byUid.get(r.uid);
-      if (!entry) {
+      if (!byUid.has(r.uid)) {
         const fullName = `${r.firstname || ''} ${r.lastname || ''}`.trim();
-        entry = {
+        byUid.set(r.uid, {
           uid: r.uid,
           nombre: r.alias || fullName || 'MVP',
           deporte: _GAMETYPE_MAP[r.gameType] || r.gameType,
           partidos_mvp: 0,
           foto_url: r.profilePic || null,
-        };
-        byUid.set(r.uid, entry);
+        });
+        order.push(r.uid);
       }
-      entry.partidos_mvp += 1;
+      byUid.get(r.uid).partidos_mvp += 1;
     }
-    return [...byUid.values()]
-      .sort((a, b) => b.partidos_mvp - a.partidos_mvp)
+    return order
       .slice(0, 3)
-      .map((m, i) => ({ ...m, rank: i + 1 }));
+      .map((uid, i) => ({ ...byUid.get(uid), rank: i + 1 }));
   }
 
   const _MVP_SPORT_LABEL = {
