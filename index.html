@@ -459,10 +459,14 @@
       font-family:'Barlow Condensed',sans-serif;
       font-size:.65rem; font-weight:700; letter-spacing:.12em;
       text-transform:uppercase; padding:4px 10px;
+      background:rgba(7,7,7,.72);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      box-shadow:0 2px 8px rgba(0,0,0,.35);
     }
-    .status-ok   { background:rgba(0,200,100,.12); border:1px solid rgba(0,200,100,.35); color:var(--green); }
-    .status-few  { background:rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.35); color:var(--amber); }
-    .status-full { background:rgba(194,0,0,.12); border:1px solid rgba(194,0,0,.35); color:var(--red); }
+    .status-ok   { color:#22e07a; border:1px solid rgba(34,224,122,.55); }
+    .status-few  { color:#fbbf24; border:1px solid rgba(251,191,36,.55); }
+    .status-full { color:#ff4d4d; border:1px solid rgba(255,77,77,.55); }
 
     .partido-body { padding:24px; }
 
