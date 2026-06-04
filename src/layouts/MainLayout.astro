@@ -1,0 +1,108 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = "EZ Play · Reserva tu cupo y juega fútbol y volleyball en Panamá",
+  description = "Reserva tu cupo y juega fútbol o volleyball en Panamá. +3,000 jugadores, +500 partidos organizados. Árbitro, balón, petos y equipos listos. Solo descargas la app.",
+  canonicalUrl = "https://ezplayapp.com",
+  ogImage = "https://ezplayapp.com/assets/fotos/hero-partido.jpg",
+  noindex = false,
+} = Astro.props;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "EZ Play",
+  "operatingSystem": "iOS, Android",
+  "applicationCategory": "SportsApplication",
+  "description": "App para reservar partidos de fútbol y volleyball en Panamá. Árbitro, balón, petos y equipos organizados.",
+  "url": "https://ezplayapp.com",
+  "image": "https://ezplayapp.com/assets/fotos/hero-partido.jpg",
+  "inLanguage": "es-PA",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "3000"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Panamá"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EZ Play",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ezplayapp.com/assets/Logo%20(PNG)/Logo%20EZPlay%206%20transparent.png"
+    }
+  }
+};
+---
+
+<!doctype html>
+<html lang="es-PA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="EZ Play, fútbol Panamá, volleyball Panamá, reservar cancha, partidos pickup, deporte Panamá, app deportiva Panamá" />
+    <meta name="author" content="EZ Play" />
+    <meta name="theme-color" content="#C20000" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="EZ Play" />
+    <meta property="og:locale" content="es_PA" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Partido de EZ Play en Panamá" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/png" href="/EZ-Play/favicon.png" />
+    <link rel="apple-touch-icon" href="/EZ-Play/apple-touch-icon.png" />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

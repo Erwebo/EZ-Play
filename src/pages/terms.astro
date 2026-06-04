@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="es-PA">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Términos y Condiciones · EZ Play</title>
-  <meta name="description" content="Términos y Condiciones de uso de EZ Play. Reglas para usar la app y reservar partidos." />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="Términos y Condiciones · EZ Play"
+  description="Términos y Condiciones de uso de EZ Play. Reglas para usar la app y reservar partidos."
+  canonicalUrl="https://ezplayapp.com/terms"
+>
+  <style is:inline>
     body { font-family:'Barlow',sans-serif; background:#070707; color:#F0F0F0; line-height:1.75; padding:80px 24px 60px; }
     .legal-wrap { max-width:780px; margin:0 auto; }
     a.back { display:inline-block; font-family:'Barlow Condensed',sans-serif; font-size:.78rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#A0A0A0; text-decoration:none; margin-bottom:36px; }
@@ -22,11 +18,11 @@
     p, li { font-size:.95rem; color:#A0A0A0; margin-bottom:1rem; }
     ul { padding-left:22px; margin-bottom:1rem; }
     a { color:#C20000; text-decoration:underline; }
+    a.back { text-decoration:none; }
   </style>
-</head>
-<body>
+
   <div class="legal-wrap">
-    <a class="back" href="index.html">← Volver a EZ Play</a>
+    <a class="back" href="/">← Volver a EZ Play</a>
     <h1>Términos y Condiciones</h1>
     <div class="updated">Última actualización: Abril 2026</div>
 
@@ -71,5 +67,4 @@
     <h2>10. Contacto</h2>
     <p>Para consultas escríbenos a <a href="mailto:administracion@ezplayapp.com">administracion@ezplayapp.com</a>.</p>
   </div>
-</body>
-</html>
+</MainLayout>
